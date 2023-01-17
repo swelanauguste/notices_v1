@@ -1,0 +1,6 @@
+{% if request.user.is_superuser %}
+<a class="text-decoration-none text-warning"
+    style="position: fixed; bottom: 6%; right:10%;"
+    href="{% url 'notice-create' %}"><i
+        class="bi bi-plus-circle-fill display-1"></i></a>
+{% endif %}

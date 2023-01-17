@@ -1,0 +1,9 @@
+django
+django-crispy-forms
+django-allauth
+markdown
+django-filter
+django-pwa
+gunicorn
+tzdata
+psycopg2-binary
