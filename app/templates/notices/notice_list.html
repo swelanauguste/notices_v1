@@ -29,7 +29,7 @@ GOSL - Notices
             <hr>
             <p class="float-start text-muted">{{notice.updated_at|naturaltime}}
             </p>
-            <p class="float-end text-muted">{{notice.category}}</p>
+            <p class="float-end text-muted">{{notice.category|truncatechars:15}}</p>
         </div>
     </a>
     {% endfor %}

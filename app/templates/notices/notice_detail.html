@@ -25,9 +25,9 @@
                 <p class="px-3 small">
                     {{object.content|markdown|safe}}
                 </p>
-                <hr>
 
                 {% for att in object.files.all %}
+                <hr>
                 <a class="text-decoration-none text-dark small"
                     target="_blank"
                     href="{{att.doc.url}}">

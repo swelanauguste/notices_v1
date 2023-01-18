@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-=w^kye6expx28)@+ux6&zjw9&dhfafpvozggd)gg(k*3$n-s(f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["notices.kingship.info"]
+ALLOWED_HOSTS = ["notices.kingship.info", "localhost", "*"]
 
 
 CSRF_TRUSTED_ORIGINS = ["https://notices.kingship.info"]
@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     "notices",
     "crispy_forms",
     "django_filters",
-    'pwa',
+    "pwa",
+    "pwa_webpush",
 ]
 
 MIDDLEWARE = [
@@ -86,9 +87,7 @@ DATABASES = {
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
-} 
-
-
+}
 
 
 # Password validation
@@ -151,33 +150,23 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = "emails"
 
 
-PWA_APP_NAME = 'GOSL Notices'
+PWA_APP_NAME = "GOSL Notices"
 PWA_APP_DESCRIPTION = "Government of Saint Lucia Notices"
-PWA_APP_THEME_COLOR = '#0A0302'
-PWA_APP_BACKGROUND_COLOR = '#ffffff'
-PWA_APP_DISPLAY = 'standalone'
-PWA_APP_SCOPE = '/'
-PWA_APP_ORIENTATION = 'any'
-PWA_APP_START_URL = '/'
-PWA_APP_STATUS_BAR_COLOR = 'default'
-PWA_APP_ICONS = [
-    {
-        'src': '/static/img/lc_coa.png',
-        'sizes': '160x160'
-    }
-]
-PWA_APP_ICONS_APPLE = [
-    {
-        'src': '/static/img/lc_coa.png',
-        'sizes': '160x160'
-    }
-]
+PWA_APP_THEME_COLOR = "#0A0302"
+PWA_APP_BACKGROUND_COLOR = "#ffffff"
+PWA_APP_DISPLAY = "standalone"
+PWA_APP_SCOPE = "/"
+PWA_APP_ORIENTATION = "any"
+PWA_APP_START_URL = "/"
+PWA_APP_STATUS_BAR_COLOR = "default"
+PWA_APP_ICONS = [{"src": "/static/img/lc_coa.png", "sizes": "160x160"}]
+PWA_APP_ICONS_APPLE = [{"src": "/static/img/lc_coa.png", "sizes": "160x160"}]
 PWA_APP_SPLASH_SCREEN = [
     {
-        'src': '/static/images/icons/splash-640x1136.png',
-        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+        "src": "/static/images/icons/splash-640x1136.png",
+        "media": "(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)",
     }
 ]
-PWA_APP_DIR = 'ltr'
-PWA_APP_LANG = 'en-US'
+PWA_APP_DIR = "ltr"
+PWA_APP_LANG = "en-US"
 # PWA_SERVICE_WORKER_PATH = (BASE_DIR, 'serviceworker.js',)
