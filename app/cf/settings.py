@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     "crispy_forms",
     "django_filters",
     "pwa",
-    "pwa_webpush",
 ]
 
 MIDDLEWARE = [
