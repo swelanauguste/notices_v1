@@ -23,6 +23,7 @@ services:
       - POSTGRES_USER=notices
       - POSTGRES_PASSWORD=notices
       - POSTGRES_DB=notices
+    restart: always
 
 volumes:
   postgres_data:
