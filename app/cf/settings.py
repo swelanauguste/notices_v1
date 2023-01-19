@@ -149,7 +149,7 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = "emails"
 
 
-PWA_APP_NAME = "GOSL Notices"
+PWA_APP_NAME = "GOSL Notices alpha1.0"
 PWA_APP_DESCRIPTION = "Government of Saint Lucia Notices"
 PWA_APP_THEME_COLOR = "#0A0302"
 PWA_APP_BACKGROUND_COLOR = "#ffffff"
