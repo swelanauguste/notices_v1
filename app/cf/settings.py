@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "django_filters",
     "pwa",
+    "request",
 ]
 
 MIDDLEWARE = [
@@ -44,6 +45,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "request.middleware.RequestMiddleware",
 ]
 
 ROOT_URLCONF = "cf.urls"
@@ -168,4 +170,3 @@ PWA_APP_SPLASH_SCREEN = [
 ]
 PWA_APP_DIR = "ltr"
 PWA_APP_LANG = "en-US"
-# PWA_SERVICE_WORKER_PATH = (BASE_DIR, 'serviceworker.js',)
