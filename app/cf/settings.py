@@ -158,8 +158,8 @@ PWA_APP_SCOPE = "/"
 PWA_APP_ORIENTATION = "any"
 PWA_APP_START_URL = "/"
 PWA_APP_STATUS_BAR_COLOR = "default"
-PWA_APP_ICONS = [{"src": "/static/img/lc_coa.png", "sizes": "160x160"}]
-PWA_APP_ICONS_APPLE = [{"src": "/static/img/lc_coa.png", "sizes": "160x160"}]
+PWA_APP_ICONS = [{"src": "/static/images/lc_coa.png", "sizes": "160x160"}]
+PWA_APP_ICONS_APPLE = [{"src": "/static/images/lc_coa.png", "sizes": "160x160"}]
 PWA_APP_SPLASH_SCREEN = [
     {
         "src": "/static/images/icons/splash-640x1136.png",
