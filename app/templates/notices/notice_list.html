@@ -22,10 +22,10 @@ GOSL - Notices
     </div>
     <br>
     {% for notice in object_list %}
-    <a class="text-decoration-none text-dark"
+    <a title="{{notice.title|title}}" class="text-decoration-none text-dark"
         href="{{notice.get_absolute_url}}">
         <div class="border shadow pb-5 pt-3 px-4 rounded-4 mb-2 hover">
-            <h5>{{notice.title|truncatechars:70 }}</h5>
+            <h5>{{notice.title|truncatechars:45|title }}</h5>
             <hr>
             <p class="float-start text-muted">{{notice.updated_at|naturaltime}}
             </p>

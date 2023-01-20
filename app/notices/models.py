@@ -2,6 +2,7 @@ import os
 
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -15,6 +16,23 @@ class Category(models.Model):
         return self.category.capitalize()
 
 
+class Author(models.Model):
+    first_name = models.CharField(max_length=255, blank=True, null=True)
+    last_name = models.CharField(max_length=255, blank=True, null=True)
+    post = models.CharField(max_length=255, blank=True, null=True)
+    department = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    address1 = models.CharField(max_length=255, blank=True, null=True)
+    tel = models.CharField(max_length=15, blank=True, null=True, default="758")
+    tel1 = models.CharField(max_length=15, blank=True, null=True, default="758")
+    tel2 = models.CharField(max_length=15, blank=True, null=True, default="758")
+    fax = models.CharField(max_length=15, blank=True, null=True, default="758")
+    email = models.EmailField(max_length=254, blank=True, null=True, default=".govt.lc")
+
+    def __str__(self):
+        return f"{self.first_name.title()} {self.last_name.title()}"
+
+
 class Notice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -26,17 +44,30 @@ class Notice(models.Model):
         blank=True,
     )
     title = models.CharField(max_length=100)
+    slug_name = models.SlugField(unique=True, null=True, blank=True)
     content = models.TextField()
-    author = models.CharField(max_length=50, default="admin")
-    
+    author = models.ForeignKey(
+        Author,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="notice_author_list",
+    )
+
     class Meta:
-        ordering = ('-updated_at',)
+        ordering = ("-updated_at",)
+        
+    def save(self, *args, **kwargs):
+        if not self.slug_name:
+            # Newly created object, so set slug
+            self.slug_name = slugify(self.title)
+        super(Notice, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("notice-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return self.title
+        return self.title.title()
 
 
 class NoticeFile(models.Model):
@@ -52,7 +83,7 @@ class NoticeFile(models.Model):
         return f"{filename}"
 
     def save(self, *args, **kwargs):
-        self.doc_name = self.get_file_name(self.doc).replace('notice_files/', 'new')
+        self.doc_name = self.get_file_name(self.doc).replace("notice_files/", "new")
         super(NoticeFile, self).save(*args, **kwargs)
 
     def __str__(self):
