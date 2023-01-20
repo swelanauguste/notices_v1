@@ -6,7 +6,15 @@ from django.utils.text import slugify
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=100, unique=True)
+    category = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.category:
+            # Newly created object, so set slug
+            self.category = slugify(self.category)
+        super(Category, self).save(*args, **kwargs)
+
 
     class Meta:
         ordering = ("category",)
@@ -43,8 +51,8 @@ class Notice(models.Model):
         null=True,
         blank=True,
     )
-    title = models.CharField(max_length=100)
-    slug_name = models.SlugField(unique=True, null=True, blank=True)
+    title = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
     content = models.TextField()
     author = models.ForeignKey(
         Author,
@@ -58,13 +66,13 @@ class Notice(models.Model):
         ordering = ("-updated_at",)
         
     def save(self, *args, **kwargs):
-        if not self.slug_name:
+        if not self.slug:
             # Newly created object, so set slug
-            self.slug_name = slugify(self.title)
+            self.slug = slugify(self.title)
         super(Notice, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("notice-detail", kwargs={"pk": self.pk})
+        return reverse("notice-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title.title()
@@ -73,7 +81,7 @@ class Notice(models.Model):
 class NoticeFile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    doc_name = models.CharField(max_length=100, blank=True, null=True)
+    doc_name = models.CharField(max_length=255, blank=True, null=True)
     notice = models.ForeignKey(
         Notice, on_delete=models.CASCADE, null=True, blank=True, related_name="files"
     )
