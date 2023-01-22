@@ -42,9 +42,23 @@ class Author(models.Model):
         return f"{self.post.title()} {self.department.title()}"
 
 
+class NoticeStatus(models.Model):
+    status = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ("status",)
+        verbose_name_plural = "Notice Statuses"
+
+    def __str__(self):
+        return self.status
+
+
 class Notice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.ForeignKey(
+        NoticeStatus, on_delete=models.CASCADE, null=True, default=1
+    )
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
@@ -64,7 +78,7 @@ class Notice(models.Model):
     )
 
     class Meta:
-        ordering = ("-updated_at",)
+        ordering = ("-created_at",)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -76,7 +90,7 @@ class Notice(models.Model):
         return reverse("notice-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
-        return self.title.title()
+        return f"{self.title.title()} - ({self.status.status.upper()})"
 
 
 class NoticeFile(models.Model):
