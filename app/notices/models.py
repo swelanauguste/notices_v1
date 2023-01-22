@@ -8,13 +8,12 @@ from django.utils.text import slugify
 class Category(models.Model):
     category = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
-    
+
     def save(self, *args, **kwargs):
         if not self.category:
             # Newly created object, so set slug
             self.category = slugify(self.category)
         super(Category, self).save(*args, **kwargs)
-
 
     class Meta:
         ordering = ("category",)
@@ -38,7 +37,9 @@ class Author(models.Model):
     email = models.EmailField(max_length=254, blank=True, null=True, default=".govt.lc")
 
     def __str__(self):
-        return f"{self.first_name.title()} {self.last_name.title()}"
+        if self.first_name and self.last_name:
+            return f"{self.first_name.title()} {self.last_name.title()}"
+        return f"{self.post.title()} {self.department.title()}"
 
 
 class Notice(models.Model):
@@ -64,7 +65,7 @@ class Notice(models.Model):
 
     class Meta:
         ordering = ("-updated_at",)
-        
+
     def save(self, *args, **kwargs):
         if not self.slug:
             # Newly created object, so set slug

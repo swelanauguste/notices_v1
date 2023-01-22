@@ -26,6 +26,7 @@
                 {{object.content|markdown|safe}}
             </p>
             <br>
+            {% if object.author.first_name %}
             <div class="d-flex">
                 <span class="material-symbols-outlined me-2">
                     person
@@ -33,18 +34,26 @@
                 <span>{{object.author.first_name}}
                     {{object.author.last_name}}</span>
             </div>
+            {% endif %}
+
+            {% if object.author.post %}
             <div class="d-flex">
                 <span class="material-symbols-outlined me-2">
                     keyboard
                 </span>
                 <span>{{object.author.post}}</span>
             </div>
+            {% endif %}
+
+            {% if object.author.department %}
             <div class="d-flex">
                 <span class="material-symbols-outlined me-2">
                     meeting_room
                 </span>
                 <span>{{object.author.department}}</span>
             </div>
+            {% endif %}
+
             {% if object.author.address %}
             <div class="d-flex">
                 <span class="material-symbols-outlined me-2">
@@ -53,6 +62,7 @@
                 <span>{{object.author.address}}</span>
             </div>
             {% endif %}
+
             {% if object.author.address1 %}
             <div class="d-flex">
                 <span class="material-symbols-outlined me-2">
