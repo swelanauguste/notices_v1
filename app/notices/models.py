@@ -90,7 +90,7 @@ class Notice(models.Model):
         return reverse("notice-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
-        return f"{self.title.title()}"
+        return f"{self.title.title()} - ({self.status.status.upper()})"
 
 
 class NoticeFile(models.Model):
