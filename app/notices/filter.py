@@ -7,7 +7,7 @@ from .models import Category, Notice
 class NoticeFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(
         lookup_expr="icontains",
-        label="Title",
+        label="",
         widget=forms.TextInput(attrs={"class": "rounded-pill"}),
     )
 
