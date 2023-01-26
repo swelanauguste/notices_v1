@@ -10,6 +10,7 @@
 
 
 {% block content %}
+<br><br>
 <div class="container my-3 pb-5 rounded-4 add-notice">
     <br>
     <form method="get">
@@ -23,11 +24,11 @@
         class="text-decoration-none text-dark"
         href="{{notice.get_absolute_url}}">
         <div class="border shadow pb-5 pt-3 px-4 rounded-4 mb-2 hover">
-            <h5>{{notice.title|truncatechars:45|title }}</h5>
+            <p class="fw-bold">{{notice.title|truncatechars:45|title }}</p>
             <hr>
             <p class="float-start text-muted">{{notice.updated_at|naturaltime}}
             </p>
-            <p class="float-end text-muted">
+            <p class="float-end text-muted small">
                 {{notice.category|truncatechars:15}}</p>
         </div>
     </a>

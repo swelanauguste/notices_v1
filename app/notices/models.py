@@ -20,7 +20,7 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
     def __str__(self):
-        return self.category.capitalize()
+        return self.category.title()
 
 
 class Author(models.Model):
@@ -30,11 +30,11 @@ class Author(models.Model):
     department = models.CharField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     address1 = models.CharField(max_length=255, blank=True, null=True)
-    tel = models.CharField(max_length=15, blank=True, null=True, default="758")
-    tel1 = models.CharField(max_length=15, blank=True, null=True, default="758")
-    tel2 = models.CharField(max_length=15, blank=True, null=True, default="758")
-    fax = models.CharField(max_length=15, blank=True, null=True, default="758")
-    email = models.EmailField(max_length=254, blank=True, null=True, default=".govt.lc")
+    tel = models.CharField(max_length=15, blank=True, null=True)
+    tel1 = models.CharField(max_length=15, blank=True, null=True)
+    tel2 = models.CharField(max_length=15, blank=True, null=True)
+    fax = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(max_length=254, blank=True, null=True)
 
     def __str__(self):
         if self.first_name and self.last_name:
@@ -50,7 +50,7 @@ class NoticeStatus(models.Model):
         verbose_name_plural = "Notice Statuses"
 
     def __str__(self):
-        return self.status
+        return self.status.title()
 
 
 class Notice(models.Model):
