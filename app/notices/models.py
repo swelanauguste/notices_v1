@@ -6,14 +6,21 @@ from django.utils.text import slugify
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=100, unique=True)
+    category = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.category:
+            # Newly created object, so set slug
+            self.category = slugify(self.category)
+        super(Category, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ("category",)
         verbose_name_plural = "categories"
 
     def __str__(self):
-        return self.category.capitalize()
+        return self.category.title()
 
 
 class Author(models.Model):
@@ -23,19 +30,35 @@ class Author(models.Model):
     department = models.CharField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     address1 = models.CharField(max_length=255, blank=True, null=True)
-    tel = models.CharField(max_length=15, blank=True, null=True, default="758")
-    tel1 = models.CharField(max_length=15, blank=True, null=True, default="758")
-    tel2 = models.CharField(max_length=15, blank=True, null=True, default="758")
-    fax = models.CharField(max_length=15, blank=True, null=True, default="758")
-    email = models.EmailField(max_length=254, blank=True, null=True, default=".govt.lc")
+    tel = models.CharField(max_length=15, blank=True, null=True)
+    tel1 = models.CharField(max_length=15, blank=True, null=True)
+    tel2 = models.CharField(max_length=15, blank=True, null=True)
+    fax = models.CharField(max_length=15, blank=True, null=True)
+    email = models.EmailField(max_length=254, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name.title()} {self.last_name.title()}"
+        if self.first_name and self.last_name:
+            return f"{self.first_name.title()} {self.last_name.title()}"
+        return f"{self.post.title()} {self.department.title()}"
+
+
+class NoticeStatus(models.Model):
+    status = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ("status",)
+        verbose_name_plural = "Notice Statuses"
+
+    def __str__(self):
+        return self.status.title()
 
 
 class Notice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.ForeignKey(
+        NoticeStatus, on_delete=models.CASCADE, null=True, default=1
+    )
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
@@ -43,8 +66,8 @@ class Notice(models.Model):
         null=True,
         blank=True,
     )
-    title = models.CharField(max_length=100)
-    slug_name = models.SlugField(unique=True, null=True, blank=True)
+    title = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
     content = models.TextField()
     author = models.ForeignKey(
         Author,
@@ -55,25 +78,25 @@ class Notice(models.Model):
     )
 
     class Meta:
-        ordering = ("-updated_at",)
-        
+        ordering = ("-created_at",)
+
     def save(self, *args, **kwargs):
-        if not self.slug_name:
+        if not self.slug:
             # Newly created object, so set slug
-            self.slug_name = slugify(self.title)
+            self.slug = slugify(self.title)
         super(Notice, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("notice-detail", kwargs={"pk": self.pk})
+        return reverse("notice-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
-        return self.title.title()
+        return f"{self.title.title()} - ({self.status.status.upper()})"
 
 
 class NoticeFile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    doc_name = models.CharField(max_length=100, blank=True, null=True)
+    doc_name = models.CharField(max_length=255, blank=True, null=True)
     notice = models.ForeignKey(
         Notice, on_delete=models.CASCADE, null=True, blank=True, related_name="files"
     )
