@@ -20,7 +20,7 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
     def __str__(self):
-        return self.category.title()
+        return self.category
 
 
 class Author(models.Model):
@@ -38,8 +38,8 @@ class Author(models.Model):
 
     def __str__(self):
         if self.first_name and self.last_name:
-            return f"{self.first_name.title()} {self.last_name.title()}"
-        return f"{self.post.title()} {self.department.title()}"
+            return f"{self.first_name} {self.last_name}"
+        return f"{self.post} {self.department}"
 
 
 class NoticeStatus(models.Model):
@@ -50,7 +50,7 @@ class NoticeStatus(models.Model):
         verbose_name_plural = "Notice Statuses"
 
     def __str__(self):
-        return self.status.title()
+        return self.status
 
 
 class Notice(models.Model):
@@ -90,7 +90,7 @@ class Notice(models.Model):
         return reverse("notice-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
-        return f"{self.title.title()} - ({self.status.status.upper()})"
+        return f"{self.title} - ({self.status.status.upper()})"
 
 
 class NoticeFile(models.Model):
@@ -110,4 +110,4 @@ class NoticeFile(models.Model):
         super(NoticeFile, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.notice.title} - {self.doc_name}"
+        return f"{self.notice.title} - {self.doc_name.lower()}"
