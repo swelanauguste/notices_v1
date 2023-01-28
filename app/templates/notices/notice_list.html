@@ -26,7 +26,7 @@
         <div class="border shadow pb-5 pt-3 px-4 rounded-4 mb-2 hover">
             <p class="fw-bolder fs-6">{{notice.title|truncatechars:65}}</p>
             <div class="container">
-                <p>{{notice.content|truncatechars:160}}</p>
+                <p>{{notice.content|truncatechars:160|markdown|safe}}</p>
                 <p class="float-start text-muted">
                     {{notice.updated_at|timesince}}
                 </p>
