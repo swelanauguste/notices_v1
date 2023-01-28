@@ -8,7 +8,6 @@
 
 {% load humanize %}
 
-
 {% block content %}
 
 <div class="container my-3 pb-5 rounded-4 add-notice">
@@ -26,7 +25,7 @@
         <div class="border pb-5 pt-3 px-4 rounded-4 mb-2 hover">
             <p class="fw-bolder fs-6">{{notice.title|truncatechars:65|title}}</p>
             <div class="container">
-                <p>{{notice.content|markdown|safe}}</p>
+                <p>{{notice.content|markdown|safe|truncatechars:160}}</p>
                 <p class="float-start text-muted">
                     {{notice.updated_at|naturaltime}}
                 </p>
