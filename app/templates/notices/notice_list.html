@@ -24,12 +24,15 @@
         class="text-decoration-none text-dark"
         href="{{notice.get_absolute_url}}">
         <div class="border shadow pb-5 pt-3 px-4 rounded-4 mb-2 hover">
-            <p>{{notice.title|truncatechars:65}}</p>
-            <hr>
-            <p class="float-start text-muted">{{notice.updated_at|naturaltime}}
-            </p>
-            <p class="float-end text-muted small">
-                {{notice.category|truncatechars:25|capfirst}}</p>
+            <p class="fw-bolder fs-6">{{notice.title|truncatechars:65}}</p>
+            <div class="container">
+                <p>{{notice.content|truncatechars:160}}</p>
+                <p class="float-start text-muted">
+                    {{notice.updated_at|timesince}}
+                </p>
+                <p class="float-end text-muted small">
+                    {{notice.category|truncatechars:25|capfirst}}</p>
+            </div>
         </div>
     </a>
     {% endfor %}
