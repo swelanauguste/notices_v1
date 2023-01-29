@@ -16,6 +16,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["notices.kingship.info", "localhost", "*"]
 
+X_FRAME_OPTIONS = 'ALLOW-FROM=kingship.info'
+
 
 CSRF_TRUSTED_ORIGINS = ["https://notices.kingship.info"]
 
