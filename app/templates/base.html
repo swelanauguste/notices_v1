@@ -42,17 +42,16 @@
 </head>
 
 <body class="small">
-
+    <a class="text-decoration-none text-dark"
+        href="/">
+        <img width="40"
+            class="rounded-circle ms-3 mt-3 shadow fixed-top"
+            src="{% static 'images/ks-logo.png' %}"
+            alt="">
+    </a>
     <div class="col-lg-4 mx-auto">
-        <div class="text-end">
-            <a class="text-decoration-none text-dark small pe-3"
-                href="/">
-                <img width="50"
-                    class="rounded-circle m-3 shadow"
-                    src="{% static 'img/ks-logo.png' %}"
-                    alt="">
-            </a>
-        </div>
+        {% include 'header.html' %}
+
         {% block content %}
 
         {% endblock content %}
