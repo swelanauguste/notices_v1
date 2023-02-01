@@ -2,8 +2,16 @@
 
 <header style="z-index: 1;"
     class="d-flex justify-content-center bg-white fixed-top shadow py-3">
-    <a class="text-decoration-none text-dark" href="/">
-    <span class="fs-4">Notices</span>
+    <a class="text-decoration-none text-dark"
+        href="/">
+        <span class="fs-4">Notices</span>
     </a>
+    {% if request.user.is_superuser %}
+
+    <a class="text-decoration-none text-dark ms-3"
+        href="{% url 'notice-drafted-list' %}">
+        <span class="fs-4">Drafted</span>
+    </a>
+    {% endif %}
 </header>
 <br><br><br>

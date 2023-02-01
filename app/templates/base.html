@@ -42,6 +42,8 @@
 </head>
 
 <body class="small">
+    {% include 'add_notice.html' %}
+
     <a class="text-decoration-none text-dark"
         href="/">
         <img width="40"
@@ -49,13 +51,13 @@
             src="{% static 'images/ks-logo.png' %}"
             alt="">
     </a>
+
     <div class="col-lg-8 mx-auto">
         {% include 'header.html' %}
 
         {% block content %}
 
         {% endblock content %}
-        {% include 'add_notice.html' %}
 
     </div>
 
