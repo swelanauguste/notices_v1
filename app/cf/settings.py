@@ -16,6 +16,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["notices.kingship.info", "localhost", "*"]
 
+X_FRAME_OPTIONS = 'ALLOW-FROM=kingship.info'
+
 
 CSRF_TRUSTED_ORIGINS = ["https://notices.kingship.info"]
 
@@ -151,8 +153,9 @@ EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = "emails"
 
 
-PWA_APP_NAME = "GOSL Notices alpha1.0"
-PWA_APP_DESCRIPTION = "Government of Saint Lucia Notices"
+PWA_APP_NAME = "Notices alpha1.0"
+PWA_APP_DESCRIPTION = "Notices"
+PWA_APP_DEBUG_MODE = False
 PWA_APP_THEME_COLOR = "#0A0302"
 PWA_APP_BACKGROUND_COLOR = "#ffffff"
 PWA_APP_DISPLAY = "standalone"
@@ -160,8 +163,8 @@ PWA_APP_SCOPE = "/"
 PWA_APP_ORIENTATION = "any"
 PWA_APP_START_URL = "/"
 PWA_APP_STATUS_BAR_COLOR = "default"
-PWA_APP_ICONS = [{"src": "/static/images/ks-logo.jpg", "sizes": "160x160"}]
-PWA_APP_ICONS_APPLE = [{"src": "/static/images/ks-logo.jpg", "sizes": "160x160"}]
+PWA_APP_ICONS = [{"src": "/static/images/ks-logo.png", "sizes": "160x160"}]
+PWA_APP_ICONS_APPLE = [{"src": "/static/images/ks-logo.png", "sizes": "160x160"}]
 PWA_APP_SPLASH_SCREEN = [
     {
         "src": "/static/images/icons/splash-640x1136.png",

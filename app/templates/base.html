@@ -1,5 +1,4 @@
 {% load static %}
-{% load pwa %}
 <!doctype html>
 <html lang="en">
 {% load pwa %}
@@ -43,28 +42,23 @@
 </head>
 
 <body class="small">
-    <div class="row">
-        <div class="col">
-            <div class="text-end">
-                <a class="text-decoration-none text-dark small pe-3"
-                    href="/">
-                    <img width="50"
-                        class="rounded-circle m-3 shadow"
-                        src="{% static 'img/ks-logo.jpg' %}"
-                        alt="">
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            {% block content %}
+    <a class="text-decoration-none text-dark"
+        href="/">
+        <img width="40"
+            class="rounded-circle ms-3 mt-2 shadow fixed-top"
+            src="{% static 'images/ks-logo.png' %}"
+            alt="">
+    </a>
+    <div class="col-lg-8 mx-auto">
+        {% include 'header.html' %}
 
-            {% endblock content %}
-        </div>
-        <div class="col">
-            <br><br><br>
-            {% include 'add_notice.html' %}
-        </div>
+        {% block content %}
+
+        {% endblock content %}
+        {% include 'add_notice.html' %}
+
     </div>
+
 
     <!-- Footer -->
     {% include 'footer.html' %}

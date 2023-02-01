@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% load markdown_extras %}
+
+{% load humanize %}
+
+{% block content %}
+
+<div class="container my-3 pb-5 rounded-4 add-notice">
+    <br>
+    <form method="get">
+        <div class="col-lg-6 mx-auto mt-3">
+            {{ form.title|as_crispy_field }}
+        </div>
+    </form>
+    <br>
+    {% for notice in object_list %}
+    <a title="{{notice.title|title}}"
+        class="text-decoration-none text-dark"
+        href="{{notice.get_absolute_url}}">
+        <div class="border pb-5 pt-3 px-4 rounded-4 mb-2 hover shadow">
+            <p class="fw-bolder fs-6">{{notice.title|truncatechars:65}}</p>
+            <div class="container">
+                <p>{{notice.content|markdown|safe|truncatechars:160}}</p>
+                <p class="float-start text-muted">
+                    {{notice.updated_at|naturaltime}}
+                </p>
+                <p class="float-end text-muted small">
+                    {{notice.category|truncatechars:25|capfirst}}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock content %}
