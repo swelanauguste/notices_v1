@@ -11,11 +11,18 @@ class NoticeFilter(django_filters.FilterSet):
         widget=forms.TextInput(attrs={"class": "rounded-pill"}),
     )
 
-    # category = django_filters.ModelChoiceFilter(
-    #     queryset=Category.objects.all(),
-    #     widget=forms.Select(attrs={"class": "rounded-pill"}),
-    # )
+    category = django_filters.ModelChoiceFilter(
+        queryset=Category.objects.all(),
+        label="",
+        widget=forms.Select(
+            attrs={
+                "class": "rounded-pill",
+                "onchange": "this.form.submit()",
+                "empty_label": "Categories",
+            }
+        ),
+    )
 
     class Meta:
         model = Notice
-        fields = ("title",)
+        fields = ("title", "category")

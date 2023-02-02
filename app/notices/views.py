@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView
 
@@ -8,6 +9,17 @@ from .models import Category, Notice
 class NoticePublishedListView(ListView):
     model = Notice
     queryset = Notice.objects.filter(status__status__icontains="published")
+
+    # def get_queryset(self):
+    #     query = self.request.GET.get("q")
+    #     if query:
+    #         return Notice.objects.filter(
+    #             Q(category__category__icontains=query)
+    #             | Q(author__first_name__icontains=query)
+    #             | Q(author__last_name__icontains=query)
+    #         ).distinct()
+    #     else:
+    #         return Installation.objects.all()
 
     def get_queryset(self):
         queryset = super().get_queryset()

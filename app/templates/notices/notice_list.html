@@ -10,11 +10,16 @@
 
 {% block content %}
 
-<div class="container my-3 pb-5 rounded-4 add-notice">
+<div class="container my-3 pb-5 rounded-4">
     <br>
     <form method="get">
-        <div class="col-lg-6 mx-auto">
-            {{ form.title|as_crispy_field }}
+        <div class="row justify-content-center">
+            <div class="col-lg-3 mb-2">
+                {{ form.category|as_crispy_field }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.title|as_crispy_field }}
+            </div>
         </div>
     </form>
     <br>

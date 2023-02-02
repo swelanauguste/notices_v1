@@ -20,7 +20,7 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
     def __str__(self):
-        return self.category
+        return self.category.title()
 
 
 class Author(models.Model):
