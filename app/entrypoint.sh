@@ -12,6 +12,7 @@ then
 fi
 
 python manage.py migrate
+python manage.py flush --no-input
 python manage.py createsuperuser --username kingship --email kingship.lc@gmail.com --no-input
 python manage.py add_category_list
 python manage.py add_notice_status_list
