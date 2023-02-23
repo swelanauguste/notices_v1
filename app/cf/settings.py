@@ -14,10 +14,9 @@ SECRET_KEY = "django-insecure-=w^kye6expx28)@+ux6&zjw9&dhfafpvozggd)gg(k*3$n-s(f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["notices.kingship.info", "localhost", "*"]
+ALLOWED_HOSTS = ["notices.kingship.info"]
 
-X_FRAME_OPTIONS = 'ALLOW-FROM=kingship.info'
-
+X_FRAME_OPTIONS = 'ALLOW-FROM=notices.kingship.info'
 
 CSRF_TRUSTED_ORIGINS = ["https://notices.kingship.info"]
 
